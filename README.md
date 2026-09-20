@@ -50,3 +50,21 @@ The program reads both router configuration files, extracts the required informa
 
 - Cisco configurations are identified using `show running-config`.
 - Huawei configurations are identified using `display current-configuration`.
+
+
+
+## Task 02 - Prompt Engineering
+
+A prompt was designed for an ISP Network Troubleshooting AI Agent with knowledge of Cisco and Huawei network environments.
+
+The prompt includes:
+- ISP network troubleshooting knowledge
+- Cisco and Huawei environments
+- Network protocols and technologies
+- A structured troubleshooting process
+- Rules to avoid unsupported assumptions
+- A clear response format
+
+The completed prompt is available in:
+
+`task02_prompt.txt`
