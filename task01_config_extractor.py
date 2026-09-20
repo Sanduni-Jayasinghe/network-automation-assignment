@@ -80,7 +80,7 @@ def write_to_excel(records, output_file):
 
     workbook.save(output_file)
 
-# Test the function with both sample configuration files
+# Read the sample router configuration files
 router_a = read_config("configs/router_a.txt")
 router_b = read_config("configs/router_b.txt")
 
