@@ -2,8 +2,13 @@ from openpyxl import Workbook
 
 # Read a router configuration file
 def read_config(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
-        return file.read()
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            return file.read()
+
+    except FileNotFoundError:
+        print(f"Error: File not found - {file_path}")
+        return ""
 
 # Detect the router vendor from the configuration content
 def detect_vendor(config):
@@ -67,7 +72,7 @@ def write_to_excel(records, output_file):
     workbook.save(output_file)
 
 # Test the function with both sample configuration files
-router_a = read_config("configs/router_a.txt")
+router_a = read_config("configs/missing.txt")
 router_b = read_config("configs/router_b.txt")
 
 # Extract records from both routers
