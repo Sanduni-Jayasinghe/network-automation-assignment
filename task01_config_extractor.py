@@ -16,6 +16,7 @@ def detect_vendor(config):
 def extract_interfaces(config):
     interfaces = []
     current_interface = None
+    vendor = detect_vendor(config)
 
     for line in config.splitlines():
         line = line.strip()
@@ -26,7 +27,8 @@ def extract_interfaces(config):
             current_interface = {
                 "Main Interface": interface_name,
                 "Description": "",
-                "VRF": ""
+                "VRF": "",
+                "Vendor": vendor
             }
 
             interfaces.append(current_interface)
