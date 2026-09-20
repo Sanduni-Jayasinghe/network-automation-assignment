@@ -80,3 +80,8 @@ all_records = cisco_records + huawei_records
 print("All extracted records:")
 for record in all_records:
     print(record)
+
+# Save all extracted records to Excel
+write_to_excel(all_records, "output/extracted_services.xlsx")
+
+print("Excel file created successfully.")    
