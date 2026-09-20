@@ -37,6 +37,9 @@ def extract_interfaces(config):
         elif line.startswith("vrf forwarding ") and current_interface is not None:
             current_interface["VRF"] = line.split(" ", 2)[2]
 
+        elif line.startswith("ip binding vpn-instance ") and current_interface is not None:
+            current_interface["VRF"] = line.split(" ", 3)[3]    
+
     return interfaces
 
 # Test the function with both sample configuration files
