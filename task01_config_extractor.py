@@ -12,10 +12,33 @@ def detect_vendor(config):
     else:
         return "Unknown"    
 
+# Extract interface names and descriptions
+def extract_interfaces(config):
+    interfaces = []
+    current_interface = None
+
+    for line in config.splitlines():
+        line = line.strip()
+
+        if line.startswith("interface "):
+            interface_name = line.split(" ", 1)[1]
+
+            current_interface = {
+                "Main Interface": interface_name,
+                "Description": ""
+            }
+
+            interfaces.append(current_interface)
+
+        elif line.startswith("description ") and current_interface is not None:
+            current_interface["Description"] = line.split(" ", 1)[1]
+
+    return interfaces
+
 # Test the function with both sample configuration files
 router_a = read_config("configs/router_a.txt")
 router_b = read_config("configs/router_b.txt")
 
 # Test vendor detection
-print("Router A Vendor:", detect_vendor(router_a))
-print("Router B Vendor:", detect_vendor(router_b))
+print("Cisco interfaces:", extract_interfaces(router_a))
+print("Huawei interfaces:", extract_interfaces(router_b))
