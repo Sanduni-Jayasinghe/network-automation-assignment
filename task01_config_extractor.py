@@ -48,6 +48,13 @@ def extract_interfaces(config):
 router_a = read_config("configs/router_a.txt")
 router_b = read_config("configs/router_b.txt")
 
-# Test vendor detection
-print("Cisco interfaces:", extract_interfaces(router_a))
-print("Huawei interfaces:", extract_interfaces(router_b))
+# Extract records from both routers
+cisco_records = extract_interfaces(router_a)
+huawei_records = extract_interfaces(router_b)
+
+# Combine all records into one list
+all_records = cisco_records + huawei_records
+
+print("All extracted records:")
+for record in all_records:
+    print(record)
