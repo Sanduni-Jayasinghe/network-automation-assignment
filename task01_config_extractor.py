@@ -12,7 +12,7 @@ def detect_vendor(config):
     else:
         return "Unknown"    
 
-# Extract interface names and descriptions
+# Extract interface details from the configuration
 def extract_interfaces(config):
     interfaces = []
     current_interface = None
@@ -25,13 +25,17 @@ def extract_interfaces(config):
 
             current_interface = {
                 "Main Interface": interface_name,
-                "Description": ""
+                "Description": "",
+                "VRF": ""
             }
 
             interfaces.append(current_interface)
 
         elif line.startswith("description ") and current_interface is not None:
             current_interface["Description"] = line.split(" ", 1)[1]
+
+        elif line.startswith("vrf forwarding ") and current_interface is not None:
+            current_interface["VRF"] = line.split(" ", 2)[2]
 
     return interfaces
 
