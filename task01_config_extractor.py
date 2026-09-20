@@ -30,6 +30,10 @@ def extract_interfaces(config):
 
     vendor = detect_vendor(config)
 
+    if vendor == "Unknown":
+        print("Warning: Unable to detect router vendor.")
+        return interfaces
+
     for line in config.splitlines():
         line = line.strip()
 
@@ -52,7 +56,7 @@ def extract_interfaces(config):
             current_interface["VRF"] = line.split(" ", 2)[2]
 
         elif line.startswith("ip binding vpn-instance ") and current_interface is not None:
-            current_interface["VRF"] = line.split(" ", 3)[3]    
+            current_interface["VRF"] = line.split(" ", 3)[3]
 
     return interfaces
 
