@@ -23,6 +23,11 @@ def detect_vendor(config):
 def extract_interfaces(config):
     interfaces = []
     current_interface = None
+
+    if not config.strip():
+        print("Warning: Configuration is empty.")
+        return interfaces
+
     vendor = detect_vendor(config)
 
     for line in config.splitlines():
@@ -72,7 +77,7 @@ def write_to_excel(records, output_file):
     workbook.save(output_file)
 
 # Test the function with both sample configuration files
-router_a = read_config("configs/missing.txt")
+router_a = read_config("configs/router_a.txt")
 router_b = read_config("configs/router_b.txt")
 
 # Extract records from both routers
