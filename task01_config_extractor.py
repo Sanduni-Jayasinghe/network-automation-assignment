@@ -1,3 +1,5 @@
+from openpyxl import Workbook
+
 # Read a router configuration file
 def read_config(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
@@ -43,6 +45,26 @@ def extract_interfaces(config):
             current_interface["VRF"] = line.split(" ", 3)[3]    
 
     return interfaces
+
+# Write extracted records to an Excel file
+def write_to_excel(records, output_file):
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "Extracted Services"
+
+    # Add column headings
+    sheet.append(["Main Interface", "Description", "VRF", "Vendor"])
+
+    # Add each extracted record as a row
+    for record in records:
+        sheet.append([
+            record["Main Interface"],
+            record["Description"],
+            record["VRF"],
+            record["Vendor"]
+        ])
+
+    workbook.save(output_file)
 
 # Test the function with both sample configuration files
 router_a = read_config("configs/router_a.txt")
